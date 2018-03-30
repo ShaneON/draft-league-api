@@ -1,0 +1,39 @@
+package personal.shaneon.draftleagueapi.player;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import personal.shaneon.draftleagueapi.user.Member;
+
+import java.util.List;
+
+@RestController
+public class PlayerController {
+
+    @Autowired
+    private PlayerService playerService;
+
+    @RequestMapping(method= RequestMethod.GET, value="/players")
+    public List<Player> getPlayers() {
+        return playerService.getPlayers();
+    }
+
+    @RequestMapping(method=RequestMethod.GET, value="/players/{id}")
+    public Player getPlayer(@PathVariable String id) {
+        return playerService.getPlayer(id);
+    }
+
+    @RequestMapping(method=RequestMethod.POST, value="/players")
+    public void addPlayer(@RequestBody Player player) {
+        playerService.addPlayer(player);
+    }
+
+    @RequestMapping(method=RequestMethod.PUT, value="/players/{id}")
+    public void updatePlayer(@PathVariable String id, @RequestBody Player player) {
+        playerService.updatePlayer(player, id);
+    }
+
+    @RequestMapping(method=RequestMethod.DELETE, value="/players/{id}")
+    public void deleteMember(@RequestBody Player player) {
+        playerService.deletePlayer(player);
+    }
+}
