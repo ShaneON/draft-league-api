@@ -1,4 +1,4 @@
-package personal.shaneon.draftleagueapi.user;
+package personal.shaneon.draftleagueapi.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public void updateMember(Member member, String id) {
+    public void updateMember(Member member) {
         memberRepository.save(member);
     }
 

@@ -1,4 +1,4 @@
-package personal.shaneon.draftleagueapi.user;
+package personal.shaneon.draftleagueapi.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +27,8 @@ public class MemberController {
     }
 
     @RequestMapping(method=RequestMethod.PUT, value="/members/{id}")
-    public void updateMember(@PathVariable String id, @RequestBody Member member) {
-        memberService.updateMember(member, id);
+    public void updateMember(@RequestBody Member member) {
+        memberService.updateMember(member);
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/members/{id}")

@@ -1,4 +1,4 @@
-package personal.shaneon.draftleagueapi.user;
+package personal.shaneon.draftleagueapi.member;
 
 import org.springframework.data.repository.CrudRepository;
 

@@ -2,7 +2,6 @@ package personal.shaneon.draftleagueapi.player;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import personal.shaneon.draftleagueapi.user.Member;
 
 import java.util.List;
 
@@ -28,8 +27,8 @@ public class PlayerController {
     }
 
     @RequestMapping(method=RequestMethod.PUT, value="/players/{id}")
-    public void updatePlayer(@PathVariable String id, @RequestBody Player player) {
-        playerService.updatePlayer(player, id);
+    public void updatePlayer(@RequestBody Player player) {
+        playerService.updatePlayer(player);
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/players/{id}")

@@ -24,11 +24,14 @@ public class PlayerService {
     }
 
     public void addPlayer(Player player) {
+        playerRepository.save(player);
     }
 
-    public void updatePlayer(Player player, String id) {
+    public void updatePlayer(Player player) {
+        playerRepository.save(player);
     }
 
     public void deletePlayer(Player player) {
+        playerRepository.delete(player);
     }
 }
