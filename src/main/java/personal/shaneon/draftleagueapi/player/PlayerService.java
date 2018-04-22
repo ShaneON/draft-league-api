@@ -42,8 +42,8 @@ public class PlayerService {
 
     public Player[] getUpdatedPlayerData() {
         RestTemplate rt = new RestTemplate();
-        String fplApi = "https://fantasy.premierleague.com/drf/bootstrap-static";
-        ResponseEntity<String> response = rt.getForEntity(fplApi, String.class);
+        String playerEndpoint = "https://fantasy.premierleague.com/drf/bootstrap-static";
+        ResponseEntity<String> response = rt.getForEntity(playerEndpoint, String.class);
         Player[] playerList = null;
         try{
             ObjectMapper mapper = new ObjectMapper();
@@ -58,5 +58,25 @@ public class PlayerService {
         catch(IOException e){}
 
         return playerList;
+    }
+
+    public PlayerStats[] getUpdatedScores(String gameweek) {
+        RestTemplate rt = new RestTemplate();
+        String gameweekEndpoint = "https://fantasy.premierleague.com/drf/event/" + gameweek + "/live";
+        ResponseEntity<String> response = rt.getForEntity(gameweekEndpoint, String.class);
+        PlayerStats[] statsList = null;
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response.getBody());
+
+            statsList = mapper.convertValue(root.get("elements"), PlayerStats[].class);
+            for(int i = 0; i < statsList.length; i++) {
+                System.out.println(statsList[i]);
+            }
+
+        }
+        catch(IOException e){}
+
+        return statsList;
     }
 }

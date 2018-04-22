@@ -21,6 +21,9 @@ public class PlayerController {
         return playerService.getUpdatedPlayerData();
     }
 
+    @RequestMapping(method= RequestMethod.GET, value="/updatescores/{gameweek}")
+    public PlayerStats[] getUpdatedScores(@PathVariable String gameweek) { return playerService.getUpdatedScores(gameweek); }
+
     @RequestMapping(method=RequestMethod.GET, value="/players/{id}")
     public Player getPlayer(@PathVariable String id) {
         return playerService.getPlayer(id);
