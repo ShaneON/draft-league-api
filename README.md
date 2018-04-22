@@ -1,4 +1,4 @@
-##Fantasy Draft Api
+## Fantasy Draft Api
 This is the back end of a web application I am working on for my draft fantasy football league.
 The idea is to have a central web app that the members can use to set up and pick their squads,
 transfer players between each other, see the current league table standings etc...
