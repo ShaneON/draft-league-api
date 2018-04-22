@@ -16,6 +16,11 @@ public class PlayerController {
         return playerService.getPlayers();
     }
 
+    @RequestMapping(method= RequestMethod.GET, value="/updateplayers")
+    public Player[] getUpdatedPlayerData() {
+        return playerService.getUpdatedPlayerData();
+    }
+
     @RequestMapping(method=RequestMethod.GET, value="/players/{id}")
     public Player getPlayer(@PathVariable String id) {
         return playerService.getPlayer(id);
