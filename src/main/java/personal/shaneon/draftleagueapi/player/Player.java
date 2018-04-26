@@ -16,7 +16,7 @@ public class Player {
                   int chanceOfPlayingThisRound, int chanceOfPlayingNextRound, int totalPoints, int goalsScored,
                   int assists, int cleanSheets, int goalsConceded, int ownGoals, int penaltiesSaved, int penaltiesMissed,
                   int yellowCards, int redCards, int saves, int bonus, int bps, String photo, String webName, int teamCode,
-                  int elementType, int team, String memberId) {
+                  int elementType, int team, String memberId, int gameweekPoints) {
         this.id = id;
         this.status = status;
         this.firstName = firstName;
@@ -44,6 +44,7 @@ public class Player {
         this.elementType = elementType;
         this.team = team;
         this.memberId = memberId;
+        this.gameweekPoints = gameweekPoints;
     }
 
     @Id
@@ -75,6 +76,15 @@ public class Player {
     private int team;
     @Column(name = "member_id")
     private String memberId;
+    private int gameweekPoints;
+
+    public int getGameweekPoints() {
+        return gameweekPoints;
+    }
+
+    public void setGameweekPoints(int gameweekPoints) {
+        this.gameweekPoints = gameweekPoints;
+    }
 
     public String getId() {
         return id;

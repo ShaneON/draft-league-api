@@ -1,15 +1,14 @@
 package personal.shaneon.draftleagueapi.player;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PlayerService {
@@ -60,23 +59,29 @@ public class PlayerService {
         return playerList;
     }
 
-    public PlayerStats[] getUpdatedScores(String gameweek) {
+    public Map<String, PlayerStats> getUpdatedScores(String gameweek) {
         RestTemplate rt = new RestTemplate();
         String gameweekEndpoint = "https://fantasy.premierleague.com/drf/event/" + gameweek + "/live";
         ResponseEntity<String> response = rt.getForEntity(gameweekEndpoint, String.class);
-        PlayerStats[] statsList = null;
+        Map<String, PlayerStats> statsMap = null;
         try{
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(response.getBody());
-
-            statsList = mapper.convertValue(root.get("elements"), PlayerStats[].class);
-            for(int i = 0; i < statsList.length; i++) {
-                System.out.println(statsList[i]);
-            }
+            JsonNode elements = root.get("elements");
+            statsMap = mapper.readValue(elements.toString(), new TypeReference<HashMap<String, PlayerStats>>() {});
 
         }
         catch(IOException e){}
 
-        return statsList;
+        Iterator it = statsMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, PlayerStats> playerStats = (Map.Entry<String, PlayerStats>)it.next();
+            Player playerToUpdate = playerRepository.findById(playerStats.getKey()).get();
+            playerToUpdate.setGameweekPoints(playerStats.getValue().getStats().getGameweekPoints());
+            playerRepository.save(playerToUpdate);
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+
+        return statsMap;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class PlayerController {
@@ -22,7 +23,7 @@ public class PlayerController {
     }
 
     @RequestMapping(method= RequestMethod.GET, value="/updatescores/{gameweek}")
-    public PlayerStats[] getUpdatedScores(@PathVariable String gameweek) { return playerService.getUpdatedScores(gameweek); }
+    public Map<String, PlayerStats> getUpdatedScores(@PathVariable String gameweek) { return playerService.getUpdatedScores(gameweek); }
 
     @RequestMapping(method=RequestMethod.GET, value="/players/{id}")
     public Player getPlayer(@PathVariable String id) {

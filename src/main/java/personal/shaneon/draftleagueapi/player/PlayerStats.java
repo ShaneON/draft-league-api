@@ -8,12 +8,16 @@ public class PlayerStats {
 
     public PlayerStats() {}
 
-    public PlayerStats(Stats stats) {
-        this.stats = stats;
-    }
+//    public PlayerStats(Stats stats) {
+//        this.stats = stats;
+//    }
 
     @JsonProperty(value = "stats")
     private Stats stats;
+
+    public String toString() {
+        return Integer.toString(getStats().getGameweekPoints());
+    }
 
     public Stats getStats() {
         return stats;
@@ -24,24 +28,23 @@ public class PlayerStats {
     }
 }
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Stats {
 
     public Stats() {}
 
-    public Stats(String gameweekPoints) {
+    public Stats(int gameweekPoints) {
         this.gameweekPoints = gameweekPoints;
     }
 
     @JsonProperty(value = "total_points")
-    private String gameweekPoints;
+    private int gameweekPoints;
 
-    public String getGameweekPoints() {
+    public int getGameweekPoints() {
         return gameweekPoints;
     }
 
-    public void setGameweekPoints(String gameweekPoints) {
+    public void setGameweekPoints(int gameweekPoints) {
         this.gameweekPoints = gameweekPoints;
     }
 }
