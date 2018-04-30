@@ -1,6 +1,7 @@
 package personal.shaneon.draftleagueapi.player;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ public class Player {
     public Player(String id, String status, String firstName, String secondName, int squadNumber, String news,
                   int chanceOfPlayingThisRound, int chanceOfPlayingNextRound, int totalPoints, int goalsScored,
                   int assists, int cleanSheets, int goalsConceded, int ownGoals, int penaltiesSaved, int penaltiesMissed,
-                  int yellowCards, int redCards, int saves, int bonus, int bps, String photo, String webName, int teamCode,
+                  int yellowCards, int redCards, int saves, int bonus, int bps, String photo, int teamCode,
                   int elementType, int team, String memberId, int gameweekPoints) {
         this.id = id;
         this.status = status;
@@ -39,7 +40,6 @@ public class Player {
         this.bonus = bonus;
         this.bps = bps;
         this.photo = photo;
-        this.webName = webName;
         this.teamCode = teamCode;
         this.elementType = elementType;
         this.team = team;
@@ -50,32 +50,48 @@ public class Player {
     @Id
     private String id;
     private String status;
+    @JsonProperty(value = "first_name")
     private String firstName;
+    @JsonProperty(value = "second_name")
     private String secondName;
+    @JsonProperty(value = "squad_number")
     private int squadNumber;
-    private String news;
+    @JsonProperty(value = "chance_of_playing_this_round")
     private int chanceOfPlayingThisRound;
+    @JsonProperty(value = "chance_of_playing_next_round")
     private int chanceOfPlayingNextRound;
+    @JsonProperty(value = "total_points")
     private int totalPoints;
+    @JsonProperty(value = "goals_scored")
     private int goalsScored;
+    private String news;
     private int assists;
+    @JsonProperty(value = "clean_sheets")
     private int cleanSheets;
+    @JsonProperty(value = "goals_conceded")
     private int goalsConceded;
+    @JsonProperty(value = "own_goals")
     private int ownGoals;
+    @JsonProperty(value = "penalties_saved")
     private int penaltiesSaved;
+    @JsonProperty(value = "penalties_missed")
     private int penaltiesMissed;
+    @JsonProperty(value = "yellow_cards")
     private int yellowCards;
+    @JsonProperty(value = "red_cards")
     private int redCards;
     private int saves;
     private int bonus;
     private int bps;
     private String photo;
-    private String webName;
+    @JsonProperty(value = "team_code")
     private int teamCode;
+    @JsonProperty(value = "element_type")
     private int elementType;
     private int team;
     @Column(name = "member_id")
     private String memberId;
+    @Column(name = "gameweek_points")
     private int gameweekPoints;
 
     public int getGameweekPoints() {
@@ -260,14 +276,6 @@ public class Player {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    public String getWebName() {
-        return webName;
-    }
-
-    public void setWebName(String webName) {
-        this.webName = webName;
     }
 
     public int getTeamCode() {

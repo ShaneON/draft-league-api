@@ -3,14 +3,12 @@ package personal.shaneon.draftleagueapi.player;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Column;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerStats {
 
     public PlayerStats() {}
-
-//    public PlayerStats(Stats stats) {
-//        this.stats = stats;
-//    }
 
     @JsonProperty(value = "stats")
     private Stats stats;
@@ -38,6 +36,7 @@ class Stats {
     }
 
     @JsonProperty(value = "total_points")
+    @Column(name = "gameweek_points")
     private int gameweekPoints;
 
     public int getGameweekPoints() {
