@@ -11,6 +11,7 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(method=RequestMethod.GET, value="/members")
     public List<Member> getMembers() {
         return memberService.getMembers();

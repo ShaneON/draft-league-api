@@ -12,6 +12,7 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(method= RequestMethod.GET, value="/players")
     public List<Player> getPlayers() {
         return playerService.getPlayers();
