@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import personal.shaneon.draftleagueapi.utils.PositionParser;
+import personal.shaneon.draftleagueapi.utils.TeamParser;
 
 import java.io.IOException;
 import java.util.*;
@@ -50,6 +52,10 @@ public class PlayerService {
 
             playerList = mapper.convertValue(root.get("elements"), Player[].class);
             for(int i = 0; i < playerList.length; i++) {
+                TeamParser teamParser = new TeamParser(playerList[i].getTeam());
+                PositionParser positionParser = new PositionParser(playerList[i].getElementType());
+                playerList[i].setTeamName(teamParser.getTeam());
+                playerList[i].setPosition(positionParser.getPosition());
                 playerRepository.save(playerList[i]);
             }
 

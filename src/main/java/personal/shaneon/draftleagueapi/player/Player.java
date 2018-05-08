@@ -41,10 +41,11 @@ public class Player {
         this.bps = bps;
         this.photo = photo;
         this.teamCode = teamCode;
-        this.elementType = elementType;
+        this.position = position;
         this.team = team;
         this.memberId = memberId;
         this.gameweekPoints = gameweekPoints;
+        this.elementType = elementType;
     }
 
     @Id
@@ -88,11 +89,29 @@ public class Player {
     private int teamCode;
     @JsonProperty(value = "element_type")
     private int elementType;
+    private String position;
     private int team;
     @Column(name = "member_id")
     private String memberId;
     @Column(name = "gameweek_points")
     private int gameweekPoints;
+    private String teamName;
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public int getElementType() {
+        return elementType;
+    }
+
+    public void setElementType(int elementType) {
+        this.elementType = elementType;
+    }
 
     public int getGameweekPoints() {
         return gameweekPoints;
@@ -286,12 +305,12 @@ public class Player {
         this.teamCode = teamCode;
     }
 
-    public int getElementType() {
-        return elementType;
+    public String getPosition() {
+        return position;
     }
 
-    public void setElementType(int elementType) {
-        this.elementType = elementType;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public int getTeam() {
