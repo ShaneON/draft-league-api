@@ -1,11 +1,13 @@
 package personal.shaneon.draftleagueapi.member;
 
+import io.katharsis.resource.annotations.JsonApiResource;
 import personal.shaneon.draftleagueapi.player.Player;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@JsonApiResource(type = "members")
 public class Member {
 
     public Member() {}

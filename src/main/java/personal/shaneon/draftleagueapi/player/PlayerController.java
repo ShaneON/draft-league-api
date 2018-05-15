@@ -1,6 +1,8 @@
 package personal.shaneon.draftleagueapi.player;
 
+import io.katharsis.spring.boot.v3.KatharsisConfigV3;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +20,12 @@ public class PlayerController {
         return playerService.getPlayers();
     }
 
-    @RequestMapping(method= RequestMethod.GET, value="/updateplayers")
+    @RequestMapping(method= RequestMethod.GET, value="/update-players")
     public Player[] getUpdatedPlayerData() {
         return playerService.getUpdatedPlayerData();
     }
 
-    @RequestMapping(method= RequestMethod.GET, value="/updatescores/{gameweek}")
+    @RequestMapping(method= RequestMethod.GET, value="/update-scores/{gameweek}")
     public Map<String, PlayerStats> getUpdatedScores(@PathVariable String gameweek) { return playerService.getUpdatedScores(gameweek); }
 
     @RequestMapping(method=RequestMethod.GET, value="/players/{id}")

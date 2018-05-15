@@ -2,12 +2,17 @@ package personal.shaneon.draftleagueapi.player;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import io.katharsis.resource.annotations.JsonApiResource;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
+@JsonApiResource(type = "players")
+//@JsonNaming(PropertyNamingStrategy.LOWER_CAMEL_CASE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Player {
 

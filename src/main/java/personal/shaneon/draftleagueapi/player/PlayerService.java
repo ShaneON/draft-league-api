@@ -4,12 +4,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import personal.shaneon.draftleagueapi.utils.PositionParser;
 import personal.shaneon.draftleagueapi.utils.TeamParser;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 @Service
@@ -43,11 +45,14 @@ public class PlayerService {
 
     public Player[] getUpdatedPlayerData() {
         RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters()
+                .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
         String playerEndpoint = "https://fantasy.premierleague.com/drf/bootstrap-static";
         ResponseEntity<String> response = rt.getForEntity(playerEndpoint, String.class);
         Player[] playerList = null;
         try{
             ObjectMapper mapper = new ObjectMapper();
+//            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
             JsonNode root = mapper.readTree(response.getBody());
 
             playerList = mapper.convertValue(root.get("elements"), Player[].class);
@@ -67,11 +72,14 @@ public class PlayerService {
 
     public Map<String, PlayerStats> getUpdatedScores(String gameweek) {
         RestTemplate rt = new RestTemplate();
+        rt.getMessageConverters()
+                .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
         String gameweekEndpoint = "https://fantasy.premierleague.com/drf/event/" + gameweek + "/live";
         ResponseEntity<String> response = rt.getForEntity(gameweekEndpoint, String.class);
         Map<String, PlayerStats> statsMap = null;
         try{
             ObjectMapper mapper = new ObjectMapper();
+            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
             JsonNode root = mapper.readTree(response.getBody());
             JsonNode elements = root.get("elements");
             statsMap = mapper.readValue(elements.toString(), new TypeReference<HashMap<String, PlayerStats>>() {});
