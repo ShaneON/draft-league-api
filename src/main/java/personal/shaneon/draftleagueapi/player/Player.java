@@ -4,14 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import io.katharsis.resource.annotations.JsonApiResource;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-@JsonApiResource(type = "players")
+//@JsonApiResource(type = "players")
 //@JsonNaming(PropertyNamingStrategy.LOWER_CAMEL_CASE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Player {
@@ -56,6 +55,7 @@ public class Player {
     @Id
     private String id;
     private String status;
+    private boolean isStarting;
     @JsonProperty(value = "first_name")
     private String firstName;
     @JsonProperty(value = "second_name")
@@ -332,5 +332,13 @@ public class Player {
 
     public void setMemberId(String memberId) {
         this.memberId = memberId;
+    }
+
+    public boolean isStarting() {
+        return isStarting;
+    }
+
+    public void setStarting(boolean starting) {
+        isStarting = starting;
     }
 }

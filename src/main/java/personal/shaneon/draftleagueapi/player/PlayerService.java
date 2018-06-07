@@ -52,7 +52,6 @@ public class PlayerService {
         Player[] playerList = null;
         try{
             ObjectMapper mapper = new ObjectMapper();
-//            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
             JsonNode root = mapper.readTree(response.getBody());
 
             playerList = mapper.convertValue(root.get("elements"), Player[].class);

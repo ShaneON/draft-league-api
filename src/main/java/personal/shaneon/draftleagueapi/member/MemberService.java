@@ -19,7 +19,7 @@ public class MemberService {
         return members;
     }
 
-    public Member getMember(String id) {
+    public Member getMember(Integer id) {
         return memberRepository.findById(id).get();
     }
 
